@@ -48,32 +48,28 @@
         $(document).ready(function(){
             $(document).bind('keydown', 'ctrl+l', function(){$('#input_01')[0].focus();})
                 .bind('keydown', 'shift+#', function(){$('#input_01')[0].value = "Shift#";})
-                .bind('keyup', 'a', function(event){
-                    var v = $('#input_01')[0].value;
-                    v = v.replace("a", "b");
-                    v = $('#input_01')[0].value = v;
-                    
-                    })
                 //.bind('keyup', function () { alert (arguments); })
                 .bind('click', function (event){
                     if (event.target == $('html')[0]){
                         alert("save the planet, don't waste energy over meaningless clicking");
                     }    
                 });
-            $('input.foo').bind(
-                'keydown', {combi:'ctrl+k', disableInInput: false}, function(event){
-                    log('binding keydown/ctrl+k to <b>input</b> applied on <b>#' + event.target.id + '</b>');
-                    event.stopPropagation();
-                    event.preventDefault();                      
-                }
-            );
+
+            $('#input_01').bind('keyup', 'a', function(event){
+            	this.value = this.value.replace(/a/g, "b");
+            });
+
+            $('input.foo').bind('keydown', 'ctrl+k', function(event){
+            	log('binding keydown/ctrl+k to <b>input</b> applied on <b>#' + event.target.id + '</b>');
+            	return false;
+            });
+
             $('table').bind('keydown click keyup', 'ctrl+l', clickHandler);
         });
         
         function clickHandler(event){
             log('binding ' + event.type + ' with(ctrl+l) to <b>table</b> applied on <b>#' + event.target.id + '</b>');
-            event.stopPropagation();
-            event.preventDefault();            
+            return false;          
         }
         
         function unbindClick(){
