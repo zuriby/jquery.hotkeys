@@ -24,14 +24,29 @@
 			112: "f1", 113: "f2", 114: "f3", 115: "f4", 116: "f5", 117: "f6", 118: "f7", 119: "f8", 
 			120: "f9", 121: "f10", 122: "f11", 123: "f12", 144: "numlock", 145: "scroll", 188: ",", 190: ".",
 			191: "/", 224: "meta"
- 		},
+		},
 	
 		shiftNums: {
 			"`": "~", "1": "!", "2": "@", "3": "#", "4": "$", "5": "%", "6": "^", "7": "&", 
 			"8": "*", "9": "(", "0": ")", "-": "_", "=": "+", ";": ": ", "'": "\"", ",": "<", 
 			".": ">",  "/": "?",  "\\": "|"
-		}
+		},
+
+		// based on: http://www.w3.org/TR/html5/the-input-element.html#attr-input-type
+		ignoreBubbling : [
+			"text", "search", "tel", "url", "email", "password", "datetime",
+			"date", "month", "week", "time", "datetime-local", "number",
+			"range", "color"
+		]
 	};
+
+	function shouldIgnore( el, event ) {
+		// Don't fire in text-accepting inputs that we didn't directly bind to
+		// important to note that $.fn.prop() is only available after jQuery 1.6
+		return el !== event.target && (/textarea|select/i.test( event.target.nodeName ) ||
+				jQuery.inArray(event.target.type, jQuery.hotkeys.ignoreBubbling) !== -1 ||
+				$(event.target).prop('contenteditable') == 'true' );
+	}
 
 	function keyHandler( handleObj ) {
 		// Only care when a possible input has been specified
@@ -43,9 +58,7 @@
 			keys = handleObj.data.toLowerCase().split(" ");
 	
 		handleObj.handler = function( event ) {
-			// Don't fire in text-accepting inputs that we didn't directly bind to
-			if ( this !== event.target && (/textarea|select/i.test( event.target.nodeName ) ||
-				 event.target.type === "text" || $(event.target).prop('contenteditable') == 'true' )) {
+			if ( shouldIgnore(this, event) ){
 				return;
 			}
 			
