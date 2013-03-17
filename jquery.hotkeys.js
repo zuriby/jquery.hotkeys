@@ -38,6 +38,10 @@
 	};
 
 	function keyHandler( handleObj ) {
+		if ( typeof handleObj.data === "string" ) {
+			handleObj.data = { keys: handleObj.data };
+		}
+
 		// Only care when a possible input has been specified
 		if ( !handleObj.data.keys || typeof handleObj.data.keys !== "string" ) {
 			return;
