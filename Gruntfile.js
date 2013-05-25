@@ -3,6 +3,11 @@ module.exports = function(grunt) {
   // Configuration.
   grunt.initConfig({
     jshint: {
+      options: {
+        "undef": true,
+        "unused": true
+      },
+
       files: ["jquery.hotkeys.js"]
     }
   });
