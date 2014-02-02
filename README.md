@@ -40,7 +40,7 @@ Hotkeys aren't tracked if you're inside of an input element (unless you explicit
 
 Works with jQuery 1.4.2 and newer.
 
-It known to be working with all the major browsers on all available platforms (Win/Mac/Linux)
+It is known to be working with all the major browsers on all available platforms (Win/Mac/Linux)
 
  * IE 6/7/8
  * FF 1.5/2/3
