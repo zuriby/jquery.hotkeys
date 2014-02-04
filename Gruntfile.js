@@ -9,13 +9,26 @@ module.exports = function(grunt) {
       },
 
       files: ["jquery.hotkeys.js"]
+    },
+    jasmine: {
+      pivotal: {
+        src: 'test/lib/**.js',
+        options: {
+          vendor: 'jquery-1.4.2.js',
+          specs: 'test/spec/*Spec.js'
+        }
+      }
     }
   });
 
   // Task loading.
   grunt.loadNpmTasks("grunt-contrib-jshint");
 
+  // tests
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
+
   // Task registration.
-  grunt.registerTask("default", ["jshint"]);
+  grunt.registerTask("default", ["jshint", "jasmine"]);
+
 
 };
