@@ -30,5 +30,4 @@ module.exports = function(grunt) {
   // Task registration.
   grunt.registerTask("default", ["jshint", "jasmine"]);
 
-
 };
