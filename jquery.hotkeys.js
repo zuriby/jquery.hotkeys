@@ -15,6 +15,8 @@
 	jQuery.hotkeys = {
 		version: "0.8+",
 
+		prefix: "",
+
 		specialKeys: {
 			8: "backspace", 9: "tab", 13: "return", 16: "shift", 17: "ctrl", 18: "alt", 19: "pause",
 			20: "capslock", 27: "esc", 32: "space", 33: "pageup", 34: "pagedown", 35: "end", 36: "home",
@@ -58,14 +60,14 @@
 			// Don't fire in text-accepting inputs that we didn't directly bind to
 			// important to note that $.fn.prop is only available on jquery 1.6+
 			if ( this !== event.target && (/textarea|select/i.test( event.target.nodeName ) ||
-				event.target.type === "text" || $(event.target).prop('contenteditable') == 'true' )) {
+				event.target.type === "text" || jQuery(event.target).prop('contenteditable') == 'true' )) {
 				return;
 			}
 
 			// Keypress represents characters, not special keys
 			var special = event.type !== "keypress" && jQuery.hotkeys.specialKeys[ event.which ],
 				character = String.fromCharCode( event.which ).toLowerCase(),
-				key, modif = "", possible = {};
+				key, prefix = jQuery.hotkeys.prefix, modif = prefix, possible = {};
 
 			// check combinations (alt|ctrl|shift+anything)
 			if ( event.altKey && special !== "alt" ) {
@@ -99,7 +101,7 @@
 			}
 
 			for ( var i = 0, l = keys.length; i < l; i++ ) {
-				if ( possible[ keys[i] ] ) {
+				if ( possible[ keys[i] ] || ( prefix.length > 0 && keys[i].indexOf( prefix ) != 0 ) ) {
 					return origHandler.apply( this, arguments );
 				}
 			}

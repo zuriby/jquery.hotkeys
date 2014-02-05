@@ -15,6 +15,14 @@ The syntax is as follows:
       this.value = this.value.replace('$', 'EUR');
     });
 
+You can also configure some prefix for your events namespace, to avoid conflicts with other namespaces:
+
+    // Configure the prefix somewhere in your code
+    jQuery.hotkeys.prefix = "hk_";
+
+    // Then bind the hotkey
+    $(document).bind('keydown.hk_ctrl_a', fn);
+
 ## Types
 Supported types are `'keydown'`, `'keyup'` and `'keypress'`
 
