@@ -35,7 +35,7 @@ Supported types are `'keydown'`, `'keyup'` and `'keypress'`
 
 ## Example
 
-[Example] http://htmlpreview.github.com/?https://github.com/jeresig/jquery.hotkeys/master/test-static-05.html
+[Example](http://htmlpreview.github.com/?https://github.com/jeresig/jquery.hotkeys/master/test-static-05.html)
 
 ## Notes
 
