@@ -8,18 +8,33 @@ module.exports = function(grunt) {
         "unused": true
       },
 
-      files: ["jquery.hotkeys.js"]
+      files: 'jquery.hotkeys.js'
     },
     jasmine: {
       pivotal: {
-        src: 'test/lib/**.js',
+        src: 'jquery.hotkeys.js',
         options: {
-          vendor: 'jquery-1.4.2.js',
+          vendor: ['jquery-1.4.2.js', 'test/lib/**.js'],
+          outfile: 'test/SpecRunner.html',
+          keepRunner: true,
           specs: 'test/spec/*Spec.js'
+        }
+      }
+    },
+    watch: {
+      scripts: {
+        files: ['**/*.js'],
+        tasks: ['default'],
+        options: {
+          spawn: false,
+          interrupt: true,
+          debounceDelay: 1000
         }
       }
     }
   });
+
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Task loading.
   grunt.loadNpmTasks("grunt-contrib-jshint");
@@ -29,5 +44,4 @@ module.exports = function(grunt) {
 
   // Task registration.
   grunt.registerTask("default", ["jshint", "jasmine"]);
-
 };

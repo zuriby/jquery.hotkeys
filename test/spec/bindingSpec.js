@@ -4,66 +4,117 @@ describe("binding functions to key combinations", function() {
 
   beforeEach(function() {
 
-    this.callbackFn = function(e) {};
+    this.callbackFn = sinon.spy();
 
-    spyOn(this, 'callbackFn');
     this.fixture = $('<div id="container"></div>');
     $('body').append(this.fixture);
 
     this.createInputEl = function(type, id) {
-      this.fixture.append('<input type="' + type + '" id="' + id + '"/>');
+      var $el = $('<input type="' + type + '" id="' + id + '"/>');
+      this.fixture.append($el);
+      return $el;
     };
 
     this.text_input_types = ["text", "password", "number", "email", "url", "range", "date", "month", "week",
       "time", "datetime", "datetime-local", "search", "color", "tel"];
 
     // creates new key event
-    this.createKeyEvent = function(keycode, namespace) {
+    this.createKeyUpEvent = function(keyCode) {
 
-      var eventName = "keyup";
-      if (namespace) {
-        eventName += '.' + namespace;
-      }
-
-      var event = jQuery.Event(eventName);
-      event.keycode = keycode;
-      event.which = keycode;
+      var event = jQuery.Event('keyup');
+      event.keyCode = keyCode;
+      event.which = keyCode;
 
       return event;
     };
   });
 
   afterEach(function(){
-    $('#container').remove();
+    this.fixture.remove();
     $(document).unbind();
   });
 
-  it("should bind the 'return' hotkey event to the document and trigger the bound callback", function() {
+  it("should bind the 'return' key to the document and trigger the bound callback", function() {
 
-    this.createInputEl('text', '01');
     $(document).bind('keyup', 'return', this.callbackFn);
-    $(document).trigger(this.createKeyEvent('13'));
-    expect(this.callbackFn).toHaveBeenCalled();
-  });
 
-  it("should bind 'Ctrl+a' and call the bound callback function", function() {
-
-    this.createInputEl('text', '01');
-    $(document).bind('keyup', 'Ctrl+a', this.callbackFn);
-
-    var event = this.createKeyEvent('65');
-    event.ctrlKey = true;
+    var event = this.createKeyUpEvent(13);
     $(document).trigger(event);
-    expect(this.callbackFn).toHaveBeenCalled();
+    sinon.assert.calledOnce(this.callbackFn);
+
   });
 
-  it("should bind to 'Alt+a' and call the bound callback function", function() {
+  it("should bind the 'alt+s' keys and call the callback handler function", function() {
 
-    this.createInputEl('text', '01');
-    $(document).bind('keyup', 'Alt+a', this.callbackFn);
-    var event = this.createKeyEvent('65');
+    $(document).bind('keyup', 'alt+a', this.callbackFn);
+    var event = this.createKeyUpEvent(65);
     event.altKey = true;
     $(document).trigger(event);
-    expect(this.callbackFn).toHaveBeenCalled();
+    sinon.assert.calledOnce(this.callbackFn);
+  });
+
+  it("should bind the 'shift+pagedown' keys and call the callback handler function", function() {
+
+    $(document).bind('keyup', 'shift+pagedown', this.callbackFn);
+    var event = this.createKeyUpEvent(34);
+    event.shiftKey = true;
+    $(document).trigger(event);
+    sinon.assert.calledOnce(this.callbackFn);
+  });
+
+  it("should bind the 'alt+shift+a' with a namespace, trigger the callback handler and unbind correctly", function() {
+
+    var spy = sinon.spy();
+
+    $(document).bind('keyup.a', 'alt+shift+a', spy);
+    $(document).bind('keyup.b', 'alt+shift+a', spy);
+    $(document).unbind('keyup.a'); // remove first binding, leaving only second
+
+    var event = this.createKeyUpEvent(65);
+    event.altKey = true;
+    event.shiftKey = true;
+    $(document).trigger(event);
+
+    // ensure only second binding is still in effect
+    sinon.assert.calledOnce(spy);
+  });
+
+  it("should not trigger event handler callbacks bound to any standard input types if not bound directly", function() {
+
+    var i = 0;
+
+    _.each(this.text_input_types, function(input_type) {
+      var spy = sinon.spy();
+
+      var $el = this.createInputEl(input_type, ++i);
+      $(document).bind('keyup', 'a', spy);
+
+      var event = this.createKeyUpEvent('65');
+      $el.trigger(event);
+
+      sinon.assert.notCalled(spy);
+      $(document).unbind();
+      $el.remove();
+
+    }, this);
+  });
+
+  it("should bind and trigger events from an input element if bound directly", function() {
+
+    var i = 0;
+
+    _.each(this.text_input_types, function(input_type) {
+      var spy = sinon.spy();
+
+      var $el = this.createInputEl(input_type, ++i);
+      $el.bind('keyup', 'a', spy);
+
+      var event = this.createKeyUpEvent('65');
+      $el.trigger(event);
+
+      sinon.assert.calledOnce(spy);
+      $el.remove();
+
+    }, this);
   });
 });

@@ -1,7 +1,7 @@
 # jQuery.Hotkeys [![Build Status](https://secure.travis-ci.org/jeresig/jquery.hotkeys.png)](http://travis-ci.org/jeresig/jquery.hotkeys)
 
 #About
-**jQuery Hotkeys** is a plug-in that lets you easily add and remove handlers for keyboard events anywhere in your code supporting almost any key combination.  
+**jQuery Hotkeys** is a plug-in that lets you easily add and remove handlers for keyboard events anywhere in your code supporting almost any key combination.
 
 This plugin is based off of the plugin by Tzury Bar Yochay: [jQuery.hotkeys](https://github.com/tzuryby/jquery.hotkeys)
 
@@ -30,13 +30,22 @@ Syntax when wanting to use jQuery's `on()`/`off` methods:
     });     
 
 ## Types
-Supported types are `'keydown'`, `'keyup'` and `'keypress'`   
+
+Supported types are `'keydown'`, `'keyup'` and `'keypress'`
+
+## Example
+
+[Example] http://htmlpreview.github.com/?https://github.com/jeresig/jquery.hotkeys/master/test-static-05.html
 
 ## Notes
+
+Modifiers are not case sensitive (Ctrl == ctrl == cTRL)
 
 If you want to use more than one modifiers (e.g. alt+ctrl+z) you should define them by an alphabetical order e.g. alt+ctrl+shift
 
 Hotkeys aren't tracked if you're inside of an input element (unless you explicitly bind the hotkey directly to the input). This helps to avoid conflict with normal user typing.
+
+You can use namespacing by adding a suffix to the event type (e.g. 'keyup.toggle')
 
 ## jQuery Compatibility
 
@@ -44,11 +53,11 @@ Works with jQuery 1.4.2 and newer.
 
 It is known to be working with all the major browsers on all available platforms (Win/Mac/Linux)
 
- * IE 6/7/8
- * FF 1.5/2/3
- * Opera-9
- * Safari-3
- * Chrome-0.2
+ * IE 6/7/8+
+ * FF 1.5/2/3+
+ * Opera-9+
+ * Safari-3+
+ * Chrome-0.2+
 
 ### Addendum
 
