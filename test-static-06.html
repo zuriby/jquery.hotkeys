@@ -10,31 +10,54 @@
         shiftKey: <input id="kd_shiftKey"><br/>
         ctrlKey: <input id="kd_ctrlKey"><br/>
         altKey: <input id="kd_altKey"><br/>
+        metaKey: <input id="kd_metaKey"><br/>
         <h1>KeyPress.</h1>
         currentTarget: <input id="kp_currentTarget"><br/>
         which: <input id="kp_which"></br>
         shiftKey: <input id="kp_shiftKey"><br/>
         ctrlKey: <input id="kp_ctrlKey"><br/>
         altKey: <input id="kp_altKey"><br/>
+        metaKey: <input id="kp_metaKey"><br/>
+        <h1>KeyUp.</h1>
+        currentTarget: <input id="ku_currentTarget"><br/>
+        which: <input id="ku_which"></br>
+        shiftKey: <input id="ku_shiftKey"><br/>
+        ctrlKey: <input id="ku_ctrlKey"><br/>
+        altKey: <input id="ku_altKey"><br/>
+        metaKey: <input id="ku_metaKey"><br/>
         <script>
-        
-            $(document).bind('keydown', KdDescribeEvent);
-            $(document).bind('keypress', KpDescribeEvent);
-            
-            function KdDescribeEvent(event){
-                $('#kd_currentTarget').val(event.currentTarget);
-                $('#kd_which').val(event.which);
-                $('#kd_shiftKey').val(event.shiftKey);
-                $('#kd_ctrlKey').val(event.ctrlKey);
-                $('#kd_altKey').val(event.altKey);            
-            }
-            function KpDescribeEvent(event){
-                $('#kp_currentTarget').val(event.currentTarget);
-                $('#kp_which').val(event.which);
-                $('#kp_shiftKey').val(event.shiftKey);
-                $('#kp_ctrlKey').val(event.ctrlKey);
-                $('#kp_altKey').val(event.altKey);            
-            }
+            $(function() {
+              function KdDescribeEvent(event){
+                  $('#kd_currentTarget').val(event.currentTarget);
+                  $('#kd_which').val(event.which);
+                  $('#kd_shiftKey').val(event.shiftKey);
+                  $('#kd_ctrlKey').val(event.ctrlKey);
+                  $('#kd_altKey').val(event.altKey);
+                  $('#kd_metaKey').val(event.metaKey);
+              }
+              function KpDescribeEvent(event){
+                  $('#kp_currentTarget').val(event.currentTarget);
+                  $('#kp_which').val(event.which);
+                  $('#kp_shiftKey').val(event.shiftKey);
+                  $('#kp_ctrlKey').val(event.ctrlKey);
+                  $('#kp_altKey').val(event.altKey);
+                  $('#kp_metaKey').val(event.metaKey);
+              }
+              function KuDescribeEvent(event){
+                  $('#ku_currentTarget').val(event.currentTarget);
+                  $('#ku_which').val(event.which);
+                  $('#ku_shiftKey').val(event.shiftKey);
+                  $('#ku_ctrlKey').val(event.ctrlKey);
+                  $('#ku_altKey').val(event.altKey);
+                  $('#ku_metaKey').val(event.metaKey);
+              }
+
+              setTimeout(function() {
+                $(document).bind('keydown',  KdDescribeEvent);
+                $(document).bind('keypress', KpDescribeEvent);
+                $(document).bind('keyup',    KuDescribeEvent);
+              }, 500);
+          });
             
         </script>
     </body>

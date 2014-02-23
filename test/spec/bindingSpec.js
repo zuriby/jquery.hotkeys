@@ -27,7 +27,7 @@ describe("binding functions to key combinations", function() {
 
       return event;
     };
-  });
+ });
 
   afterEach(function(){
     this.fixture.remove();
@@ -77,6 +77,24 @@ describe("binding functions to key combinations", function() {
 
     // ensure only second binding is still in effect
     sinon.assert.calledOnce(spy);
+  });
+
+  it("should bind the 'meta+a' keys and call the callback handler function", function() {
+
+    $(document).bind('keyup', 'meta+a', this.callbackFn);
+    var event = this.createKeyUpEvent(65);
+    event.metaKey = true;
+    $(document).trigger(event);
+    sinon.assert.calledOnce(this.callbackFn);
+  });
+
+  it("should bind the 'hyper+a' keys and call the callback handler function", function() {
+
+    $(document).bind('keyup', 'hyper+a', this.callbackFn);
+    var event = this.createKeyUpEvent(65);
+    event.shiftKey = true, event.metaKey = true, event.altKey = true, event.ctrlKey = true;
+    $(document).trigger(event);
+    sinon.assert.calledOnce(this.callbackFn);
   });
 
   it("should not trigger event handler callbacks bound to any standard input types if not bound directly", function() {

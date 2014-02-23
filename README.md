@@ -29,23 +29,13 @@ Syntax when wanting to use jQuery's `on()`/`off` methods:
       this.value = this.value.replace('$', 'EUR');
     });     
 
-## Types
-
-Supported types are `'keydown'`, `'keyup'` and `'keypress'`
-
 ## Example
 
 [Example](http://htmlpreview.github.com/?https://github.com/jeresig/jquery.hotkeys/master/test-static-05.html)
 
-## Notes
+## Event Types
 
-Modifiers are not case sensitive (Ctrl == ctrl == cTRL)
-
-If you want to use more than one modifiers (e.g. alt+ctrl+z) you should define them by an alphabetical order e.g. alt+ctrl+shift
-
-Hotkeys aren't tracked if you're inside of an input element (unless you explicitly bind the hotkey directly to the input). This helps to avoid conflict with normal user typing.
-
-You can use namespacing by adding a suffix to the event type (e.g. 'keyup.toggle')
+Supported types are `'keydown'`, `'keyup'` and `'keypress'`
 
 ## jQuery Compatibility
 
@@ -58,6 +48,35 @@ It is known to be working with all the major browsers on all available platforms
  * Opera-9+
  * Safari-3+
  * Chrome-0.2+
+
+## Notes
+
+Modifiers are not case sensitive (`Ctrl` == `ctrl` == `cTRL`)
+
+If you want to use more than one modifier (e.g. `alt+ctrl+z`) you should define them by an alphabetical order e.g. alt+ctrl+shift
+
+Hotkeys aren't tracked if you're inside of an input element (unless you explicitly bind the hotkey directly to the input). This helps to avoid conflict with normal user typing.
+
+You can use namespacing by adding a suffix to the event type (e.g. `keyup.toggle`)
+
+
+### Meta and Hyper Keys
+Meta and hyper keys don't register on `keyup` in any browser tested.
+
+#### Chrome 33.0.1750.117
+Meta key registers on `keydown` event.
+Hyper key registers on `keydown` event.
+
+#### Firefox 27.0.1 and Safari 7.0.1
+Meta key registers on `keydown` and `keypress` events.
+Hyper key registers on `keydown` and `keypress` events.
+
+#### Opera 19.0
+Meta key doesn't register at all :(
+Hyper key registers on `keydown` and `keypress` events.
+
+#### TL;DR
+Bind to `keydown` event for meta and hyper keys, but meta key does not work in Opera ;)
 
 ### Addendum
 
