@@ -7,27 +7,31 @@ This plugin is based off of the plugin by Tzury Bar Yochay: [jQuery.hotkeys](htt
 
 The syntax is as follows:
 
-    $(expression).bind(types, keys, handler);
-    $(expression).unbind(types, handler);
-    
-    $(document).bind('keydown', 'ctrl+a', fn);
-    
-    // e.g. replace '$' sign with 'EUR'
-    $('input.foo').bind('keyup', '$', function(){
-      this.value = this.value.replace('$', 'EUR');
-    });
-    
+```javascript
+$(expression).bind(types, keys, handler);
+$(expression).unbind(types, handler);
+
+$(document).bind('keydown', 'ctrl+a', fn);
+
+// e.g. replace '$' sign with 'EUR'
+$('input.foo').bind('keyup', '$', function(){
+  this.value = this.value.replace('$', 'EUR');
+});
+```
+
 Syntax when wanting to use jQuery's `on()`/`off` methods:
 
-    $(expression).on(types, null, keys, handler);
-    $(expression).off(types, handler);
-    
-    $(document).on('keydown', null, 'ctrl+a', fn);
-    
-    // e.g. replace '$' sign with 'EUR'
-    $('input.foo').on('keyup', null, '$', function(){
-      this.value = this.value.replace('$', 'EUR');
-    });     
+```javascript
+$(expression).on(types, null, keys, handler);
+$(expression).off(types, handler);
+
+$(document).on('keydown', null, 'ctrl+a', fn);
+
+// e.g. replace '$' sign with 'EUR'
+$('input.foo').on('keyup', null, '$', function(){
+  this.value = this.value.replace('$', 'EUR');
+});     
+```
 
 ## Example
 
