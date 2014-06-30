@@ -7,14 +7,12 @@ module.exports = function(grunt) {
         "undef": true,
         "unused": true
       },
-
       files: 'jquery.hotkeys.js'
     },
     jasmine: {
       pivotal: {
-        src: 'jquery.hotkeys.js',
         options: {
-          vendor: ['jquery-1.4.2.js', 'test/lib/**.js'],
+          vendor: ['jquery-1.4.2.js', 'jquery.hotkeys.js', 'test/lib/**.js'],
           outfile: 'test/SpecRunner.html',
           keepRunner: true,
           specs: 'test/spec/*Spec.js'

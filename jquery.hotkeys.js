@@ -35,13 +35,22 @@
 			"`": "~", "1": "!", "2": "@", "3": "#", "4": "$", "5": "%", "6": "^", "7": "&",
 			"8": "*", "9": "(", "0": ")", "-": "_", "=": "+", ";": ": ", "'": "\"", ",": "<",
 			".": ">",  "/": "?",  "\\": "|"
+    },
+
+    // excludes: button, checkbox, file, hidden, image, password, radio, reset, search, submit, url
+    textAcceptingInputTypes: [
+      "text", "password", "number", "email", "url", "range", "date", "month", "week", "time", "datetime",
+      "datetime-local", "search", "color", "tel"],
+
+    options: {
+      filterTextInputs: true
 		}
 	};
 
-	function keyHandler( handleObj ) {
-		if ( typeof handleObj.data === "string" ) {
-			handleObj.data = { keys: handleObj.data };
-		}
+  function keyHandler( handleObj ) {
+    if ( typeof handleObj.data === "string" ) {
+      handleObj.data = { keys: handleObj.data };
+    }
 
 		// Only care when a possible input has been specified
 		if ( !handleObj.data || !handleObj.data.keys || typeof handleObj.data.keys !== "string" ) {
@@ -49,14 +58,13 @@
 		}
 
 		var origHandler = handleObj.handler,
-			keys = handleObj.data.keys.toLowerCase().split(" "),
-			textAcceptingInputTypes = ["text", "password", "number", "email", "url", "range", "date", "month", "week",
-        "time", "datetime", "datetime-local", "search", "color", "tel"];
+			keys = handleObj.data.keys.toLowerCase().split(" ");
 
-		handleObj.handler = function( event ) {
-			// Don't fire in text-accepting inputs that we didn't directly bind to
-			if ( this !== event.target && (/textarea|select/i.test( event.target.nodeName ) ||
-				jQuery.inArray(event.target.type, textAcceptingInputTypes) > -1 ) ) {
+    handleObj.handler = function( event ) {
+      // Don't fire in text-accepting inputs that we didn't directly bind to
+      if ( this !== event.target && (/textarea|select/i.test( event.target.nodeName ) ||
+        ( jQuery.hotkeys.options.filterTextInputs &&
+          jQuery.inArray(event.target.type, jQuery.hotkeys.textAcceptingInputTypes) > -1 ) ) ) {
 				return;
 			}
 
