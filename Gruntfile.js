@@ -16,7 +16,7 @@ module.exports = function(grunt) {
           'max_preserve_newlines': 2,
           'jslint_happy': false,
           'brace_style': 'end-expand',
-          'indent_scripts': 'keep',
+          'indent_scripts ': 'keep',
           'keep_array_indentation': true,
           'keep_function_indentation': false,
           'space_before_conditional': true,

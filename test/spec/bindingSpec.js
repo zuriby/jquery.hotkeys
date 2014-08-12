@@ -15,7 +15,12 @@ describe("binding functions to key combinations", function() {
 
       var keyEvent = 'keyup';
 
-      keyModifiers = _.extend( {ctrl: false, alt: false, shift: false, meta: false}, keyModifiers);
+      keyModifiers = _.extend({
+        ctrl: false,
+        alt: false,
+        shift: false,
+        meta: false
+      }, keyModifiers);
 
       $(document).bind(keyEvent, keyAsText, callback);
       var event = this.createKeyEvent(keyCode, keyEvent);
@@ -28,7 +33,7 @@ describe("binding functions to key combinations", function() {
       return $(document).trigger(event);
     };
 
-    this.assertTextInputKeyEventTriggered = function (bindDirectly, expectToBeTriggered) {
+    this.assertTextInputKeyEventTriggered = function(bindDirectly, expectToBeTriggered) {
 
       var keyEvent = 'keyup';
       var keyCode = '65';
@@ -76,9 +81,9 @@ describe("binding functions to key combinations", function() {
 
       return event;
     };
- });
+  });
 
-  afterEach(function(){
+  afterEach(function() {
     this.cleanup(this.fixture);
   });
 
@@ -90,13 +95,17 @@ describe("binding functions to key combinations", function() {
 
   it("should bind the 'alt+s' keys and call the callback handler function", function() {
 
-    this.bindAndTriggerKeyEvent('alt+a', '65', this.callbackFn, {alt: true});
+    this.bindAndTriggerKeyEvent('alt+a', '65', this.callbackFn, {
+      alt: true
+    });
     sinon.assert.calledOnce(this.callbackFn);
   });
 
   it("should bind the 'shift+pagedown' keys and call the callback handler function", function() {
 
-    this.bindAndTriggerKeyEvent('shift+pagedown', '34', this.callbackFn, {shift: true});
+    this.bindAndTriggerKeyEvent('shift+pagedown', '34', this.callbackFn, {
+      shift: true
+    });
     sinon.assert.calledOnce(this.callbackFn);
   });
 
@@ -108,7 +117,10 @@ describe("binding functions to key combinations", function() {
     $(document).bind('keyup.b', 'alt+shift+a', spy);
     $(document).unbind('keyup.a'); // remove first binding, leaving only second
 
-    this.bindAndTriggerKeyEvent('alt+shift+a', '65', this.callbackFn, {shift: true, alt: true});
+    this.bindAndTriggerKeyEvent('alt+shift+a', '65', this.callbackFn, {
+      shift: true,
+      alt: true
+    });
 
     // ensure only second binding is still in effect
     sinon.assert.calledOnce(spy);
@@ -116,13 +128,20 @@ describe("binding functions to key combinations", function() {
 
   it("should bind the 'meta+a' keys and call the callback handler function", function() {
 
-    this.bindAndTriggerKeyEvent('meta+a', '65', this.callbackFn, {meta: true});
+    this.bindAndTriggerKeyEvent('meta+a', '65', this.callbackFn, {
+      meta: true
+    });
     sinon.assert.calledOnce(this.callbackFn);
   });
 
   it("should bind the 'hyper+a' keys and call the callback handler function", function() {
 
-    this.bindAndTriggerKeyEvent('hyper+a', '65', this.callbackFn, {meta: true, shift: true, alt: true, ctrl: true});
+    this.bindAndTriggerKeyEvent('hyper+a', '65', this.callbackFn, {
+      meta: true,
+      shift: true,
+      alt: true,
+      ctrl: true
+    });
     sinon.assert.calledOnce(this.callbackFn);
   });
 
