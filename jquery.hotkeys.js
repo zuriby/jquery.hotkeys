@@ -135,31 +135,38 @@
       keys = handleObj.data.keys.toLowerCase().split(" ");
 
     handleObj.handler = function(event) {
-      // Don't fire in text-accepting inputs that we didn't directly bind to
+      //      Don't fire in text-accepting inputs that we didn't directly bind to
       if (this !== event.target && (/textarea|select/i.test(event.target.nodeName) ||
         (jQuery.hotkeys.options.filterTextInputs &&
           jQuery.inArray(event.target.type, jQuery.hotkeys.textAcceptingInputTypes) > -1))) {
         return;
       }
 
-      var special = jQuery.hotkeys.specialKeys[event.keyCode],
+      var special = event.type !== "keypress" && jQuery.hotkeys.specialKeys[event.which],
         character = String.fromCharCode(event.which).toLowerCase(),
         modif = "",
         possible = {};
 
-      jQuery.each(["alt", "ctrl", "meta", "shift"], function(index, specialKey) {
+      jQuery.each(["alt", "ctrl", "shift"], function(index, specialKey) {
+
         if (event[specialKey + 'Key'] && special !== specialKey) {
           modif += specialKey + '+';
         }
       });
 
-      modif = modif.replace('alt+ctrl+meta+shift', 'hyper');
+      // metaKey is triggered off ctrlKey erronously
+      if (event.metaKey && !event.ctrlKey && special !== "meta") {
+        modif += "meta+";
+      }
+
+      if (event.metaKey && special !== "meta" && modif.indexOf("alt+ctrl+shift+") > -1) {
+        modif = modif.replace("alt+ctrl+shift+", "hyper+");
+      }
 
       if (special) {
         possible[modif + special] = true;
       }
-
-      if (character) {
+      else {
         possible[modif + character] = true;
         possible[modif + jQuery.hotkeys.shiftNums[character]] = true;
 

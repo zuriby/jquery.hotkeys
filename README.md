@@ -35,7 +35,7 @@ $('input.foo').on('keyup', null, '$', function(){
 
 ## Example
 
-[Example](http://htmlpreview.github.com/?https://github.com/jeresig/jquery.hotkeys/master/test-static-05.html)
+[Example](https://rawgit.com/jeresig/jquery.hotkeys/master/test-static-01.html)
 
 ## Event Types
 
