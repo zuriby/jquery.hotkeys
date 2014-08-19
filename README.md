@@ -31,7 +31,7 @@ Syntax when wanting to use jQuery's `on()`/`off` methods:
 
 ## Example
 
-[Example](http://htmlpreview.github.com/?https://github.com/jeresig/jquery.hotkeys/master/test-static-05.html)
+[Example](https://cdn.rawgit.com/jeresig/jquery.hotkeys/master/test-static-01.html)
 
 ## Event Types
 
