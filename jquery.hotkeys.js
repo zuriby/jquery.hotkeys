@@ -143,18 +143,25 @@
       }
 
       var special = event.type !== "keypress" && jQuery.hotkeys.specialKeys[event.which],
-
         character = String.fromCharCode(event.which).toLowerCase(),
         modif = "",
         possible = {};
 
-      jQuery.each(["alt", "ctrl", "meta", "shift"], function(index, specialKey) {
+      jQuery.each(["alt", "ctrl", "shift"], function(index, specialKey) {
+
         if (event[specialKey + 'Key'] && special !== specialKey) {
           modif += specialKey + '+';
         }
       });
 
-      modif = modif.replace('alt+ctrl+meta+shift', 'hyper');
+      // metaKey is triggered off ctrlKey erronously
+      if (event.metaKey && !event.ctrlKey && special !== "meta") {
+        modif += "meta+";
+      }
+
+      if (event.metaKey && special !== "meta" && modif.indexOf("alt+ctrl+shift+") > -1) {
+        modif = modif.replace("alt+ctrl+shift+", "hyper+");
+      }
 
       if (special) {
         possible[modif + special] = true;
