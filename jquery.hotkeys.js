@@ -135,14 +135,15 @@
       keys = handleObj.data.keys.toLowerCase().split(" ");
 
     handleObj.handler = function(event) {
-      // Don't fire in text-accepting inputs that we didn't directly bind to
+      //      Don't fire in text-accepting inputs that we didn't directly bind to
       if (this !== event.target && (/textarea|select/i.test(event.target.nodeName) ||
         (jQuery.hotkeys.options.filterTextInputs &&
           jQuery.inArray(event.target.type, jQuery.hotkeys.textAcceptingInputTypes) > -1))) {
         return;
       }
 
-      var special = jQuery.hotkeys.specialKeys[event.keyCode],
+      var special = event.type !== "keypress" && jQuery.hotkeys.specialKeys[event.which],
+
         character = String.fromCharCode(event.which).toLowerCase(),
         modif = "",
         possible = {};
@@ -158,8 +159,7 @@
       if (special) {
         possible[modif + special] = true;
       }
-
-      if (character) {
+      else {
         possible[modif + character] = true;
         possible[modif + jQuery.hotkeys.shiftNums[character]] = true;
 
