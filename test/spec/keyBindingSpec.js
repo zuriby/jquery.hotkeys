@@ -68,6 +68,9 @@ describe("binding functions to key combinations", function() {
   it("should bind the 'alt+s' keys and call the callback handler function", function() {
     this.assertHotKeyBinding('keyup', 'alt+a', 65, ['alt']);
   });
+  it("should bind the 'ctrl+s' keys and call the callback handler function", function() {
+    this.assertHotKeyBinding('keyup', 'ctrl+a', 65, ['ctrl']);
+  });
 
   it("should bind the 'alt+f2' keys for keyup and call the callback handler function", function() {
     this.assertHotKeyBinding('keyup', 'alt+f2', 113, ['alt']);
