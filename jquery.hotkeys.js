@@ -1,3 +1,5 @@
+/*jslint browser: true*/
+
 /*
  * jQuery Hotkeys Plugin
  * Copyright 2010, John Resig
