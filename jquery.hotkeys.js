@@ -1,4 +1,5 @@
 /*jslint browser: true*/
+/*jslint jquery: true*/
 
 /*
  * jQuery Hotkeys Plugin
@@ -192,4 +193,4 @@
     };
   });
 
-})(this.jQuery || window.jQuery);
+})(jQuery || this.jQuery || window.jQuery);
