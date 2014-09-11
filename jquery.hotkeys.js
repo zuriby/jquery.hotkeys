@@ -1,3 +1,6 @@
+/*jslint browser: true*/
+/*jslint jquery: true*/
+
 /*
  * jQuery Hotkeys Plugin
  * Copyright 2010, John Resig
@@ -190,4 +193,4 @@
     };
   });
 
-})(this.jQuery);
+})(jQuery || this.jQuery || window.jQuery);
