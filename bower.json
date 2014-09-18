@@ -1,0 +1,10 @@
+{
+  "name": "jQuery.Hotkeys",
+  "main": "jquery.hotkeys.js",
+  "ignore": [
+    "test*"
+  ],
+  "dependencies": {
+    "jquery": "~2"
+  }
+}
