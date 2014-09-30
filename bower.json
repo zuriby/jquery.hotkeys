@@ -7,10 +7,12 @@
   "authors": ["John Resig <jeresig@gmail.com> (http://ejohn.org)"],
   "main": "jquery.hotkeys.js",
   "ignore": [
-    "hotkeys.jquery.json",
     "jquery-*",
     "test*",
-    "*.yml"
+    "*.yml",
+    ".gitignore",
+    "Gruntfile.js",
+    "*.json"
   ],
   "dependencies": {
     "jquery": ">= 1.4.2"
