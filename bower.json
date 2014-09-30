@@ -2,6 +2,8 @@
   "name": "jQuery.Hotkeys",
   "main": "jquery.hotkeys.js",
   "ignore": [
+    "hotkeys.jquery.json",
+    "jquery-*",
     "test*"
   ],
   "dependencies": {
