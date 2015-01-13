@@ -11,14 +11,22 @@ describe("binding functions to key combinations", function() {
     this.fixture = $('<div id="container"></div>');
     $('body').append(this.fixture);
 
+    this.createEl = function(type, id, extra) {
+      var $el = $('<' + type + '" id="' + id + ' ' + extra + '" />');
+      this.fixture.append($el);
+      return $el;
+    }
+
     this.createInputEl = function(type, id) {
-      var $el = $('<input type="' + type + '" id="' + id + '"/>');
+      var $el = this.createEl('input', id, 'type="' + type);
       this.fixture.append($el);
       return $el;
     };
 
+    this.all_input_types = ["input", "select", "textarea"];
+
     this.text_input_types = ["text", "password", "number", "email", "url", "range", "date", "month", "week",
-      "time", "datetime", "datetime-local", "search", "color", "tel"];
+      "time", "datetime", "datetime-local", "search", "color", "tel", "search"];
 
     // creates new key event
     this.createKeyEvent = function(keyCode, keyEventType) {
@@ -103,6 +111,27 @@ describe("binding functions to key combinations", function() {
 
   it("should bind the 'hyper+a' keys and call the callback handler function", function() {
     this.assertHotKeyBinding('keyup', 'hyper+a', 65, ['alt', 'ctrl', 'meta', 'shift']);
+  });
+
+  it("should not trigger event handler callbacks bound to any input types if not bound directly", function() {
+
+    var i = 0;
+
+    _.each(this.all_input_types, function(input_type) {
+
+      var spy = sinon.spy();
+
+      var $el = this.createEl(input_type, ++i);
+      $(document).bind('keyup', 'a', spy);
+
+      var event = this.createKeyEvent('65', 'keyup');
+      $el.trigger(event);
+
+      sinon.assert.notCalled(spy);
+      $(document).unbind();
+      $el.remove();
+
+    }, this);
   });
 
   it("should not trigger event handler callbacks bound to any standard input types if not bound directly", function() {
