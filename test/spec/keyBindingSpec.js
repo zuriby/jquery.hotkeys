@@ -12,7 +12,8 @@ describe("binding functions to key combinations", function() {
     $('body').append(this.fixture);
 
     this.createEl = function(type, id, extra) {
-      var $el = $('<' + type + '" id="' + id + ' ' + extra + '" />');
+      extra = extra || '';
+      var $el = $('<' + type + ' id="' + id + ' ' + extra + '" />');
       this.fixture.append($el);
       return $el;
     }
@@ -23,7 +24,7 @@ describe("binding functions to key combinations", function() {
       return $el;
     };
 
-    this.all_input_types = ["input", "select", "textarea"];
+    this.all_input_types = ["input", "select", "textarea", "div contenteditable=\"true\""];
 
     this.text_input_types = ["text", "password", "number", "email", "url", "range", "date", "month", "week",
       "time", "datetime", "datetime-local", "search", "color", "tel", "search"];
