@@ -117,6 +117,9 @@
       "text", "password", "number", "email", "url", "range", "date", "month", "week", "time", "datetime",
       "datetime-local", "search", "color", "tel"],
 
+    // default input types not to bind to unless bound directly
+    textInputTypes: /textarea|input|select/i,
+
     options: {
       filterTextInputs: true
     }
@@ -139,7 +142,7 @@
 
     handleObj.handler = function(event) {
       //      Don't fire in text-accepting inputs that we didn't directly bind to
-      if (this !== event.target && (/textarea|input|select/i.test(event.target.nodeName) ||
+      if (this !== event.target && (jQuery.hotkeys.textInputTypes.test(event.target.nodeName) ||
           (jQuery.hotkeys.options.filterTextInputs &&
             jQuery.inArray(event.target.type, jQuery.hotkeys.textAcceptingInputTypes) > -1))) {
         return;
