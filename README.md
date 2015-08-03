@@ -1,7 +1,7 @@
 #About
 **jQuery Hotkeys** is a plug-in that lets you easily add and remove handlers for keyboard events anywhere in your code supporting almost any key combination.
 
-This plugin is based off of the plugin by Tzury Bar Yochay: [jQuery.hotkeys](http://github.com/tzuryby/hotkeys)
+It is based on a library [Shortcut.js](http://www.openjs.com/scripts/events/keyboard_shortcuts/shortcut.js) written by [Binny V A](http://www.openjs.com/).
 
 The syntax is as follows:
 
