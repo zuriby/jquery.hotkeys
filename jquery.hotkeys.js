@@ -21,7 +21,7 @@
 (function(jQuery) {
 
   jQuery.hotkeys = {
-    version: "0.8",
+    version: "0.2.0",
 
     specialKeys: {
       8: "backspace",
