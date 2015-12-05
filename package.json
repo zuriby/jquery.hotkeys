@@ -1,6 +1,6 @@
 {
   "name": "jquery.hotkeys",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "**jQuery Hotkeys** is a plug-in that lets you easily add and remove handlers for keyboard events anywhere in your code supporting almost any key combination.",
   "main": "jquery.hotkeys.js",
   "devDependencies": {
