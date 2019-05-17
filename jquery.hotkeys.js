@@ -30,7 +30,10 @@
 			"`": "~", "1": "!", "2": "@", "3": "#", "4": "$", "5": "%", "6": "^", "7": "&",
 			"8": "*", "9": "(", "0": ")", "-": "_", "=": "+", ";": ": ", "'": "\"", ",": "<",
 			".": ">",  "/": "?",  "\\": "|"
-		}
+		},
+		macros: [
+			"æ","ē","r̥","ṭ","ñ","ū","ī","ō","ā","ś","ḍ","ṅ","ḥ","l̥","ṣ","ṇ","ṁ","₹"
+		]
 	};
 
 	function keyHandler( handleObj ) {
@@ -89,6 +92,9 @@
 				possible[ modif + special ] = true;
 
 			} else {
+				if(modif=="" && jQuery.hotkeys.macros.indexOf(event.key.toLowerCase()) != -1){
+					modif = "alt_ctrl_";
+				}
 				possible[ modif + character ] = true;
 				possible[ modif + jQuery.hotkeys.shiftNums[ character ] ] = true;
 
