@@ -4886,7 +4886,7 @@ jQuery.each( "ajaxStart ajaxStop ajaxComplete ajaxError ajaxSuccess ajaxSend".sp
 jQuery.extend({
 
 	get: function( url, data, callback, type ) {
-		// shift arguments if data argument was omited
+		// shift arguments if data argument was omitted
 		if ( jQuery.isFunction( data ) ) {
 			type = type || callback;
 			callback = data;
@@ -4911,7 +4911,7 @@ jQuery.extend({
 	},
 
 	post: function( url, data, callback, type ) {
-		// shift arguments if data argument was omited
+		// shift arguments if data argument was omitted
 		if ( jQuery.isFunction( data ) ) {
 			type = type || callback;
 			callback = data;
